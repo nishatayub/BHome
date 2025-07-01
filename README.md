@@ -1,6 +1,6 @@
 # 🏠 BHome — Your Next Home, Just a Click Away
 
-**BHome** is a full-featured, responsive property rental platform designed to simplify the process of finding, listing, and renting properties. Whether you're a tenant searching for a cozy apartment or a landlord looking to showcase your listings, BHome offers a seamless, secure, and intuitive experience for all.
+**BHome** is a modern, full-stack property rental platform built with **Next.js**. It enables landlords to list their properties and tenants to browse, filter, and book rentals—all through a sleek, responsive, and intuitive interface.
 
 ---
 
@@ -46,18 +46,17 @@
 
 ## 🛠️ Tech Stack
 
-| Technology     | Purpose                         |
-|----------------|---------------------------------|
-| **React.js**   | Frontend UI                     |
-| **Node.js**    | Backend Server                  |
-| **Express.js** | REST API                        |
-| **MongoDB**    | Database                        |
-| **Mongoose**   | ODM for MongoDB                 |
-| **JWT**        | Authentication & Authorization  |
-| **Cloudinary** | Image Upload & Optimization     |
-| **Tailwind CSS / SCSS** | UI Styling             |
-| **Socket.io**  | Real-time chat functionality    |
-| **Mapbox/Google Maps API** | Location services  |
+| Technology       | Purpose                                      |
+|------------------|----------------------------------------------|
+| **Next.js**      | React-based framework for SSR/SSG            |
+| **Tailwind CSS** | Utility-first styling                        |
+| **MongoDB**      | NoSQL Database                               |
+| **Mongoose**     | ODM for MongoDB                              |
+| **NextAuth.js**  | Authentication & Session Management          |
+| **Cloudinary**   | Image hosting and optimization               |
+| **Mapbox / Google Maps** | Interactive maps and geolocation    |
+| **Zod / Yup**    | Schema validation                            |
+| **Stripe** (optional) | Payments and transaction handling     |
 
 ---
 
