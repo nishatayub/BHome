@@ -61,45 +61,6 @@
 
 ---
 
-## 🚀 Getting Started
-
-### 📦 Prerequisites
-- Node.js (v18+)
-- MongoDB Atlas or local instance
-- Cloudinary (for image uploads)
-- Google Maps API key (optional)
-
-### 📁 Installation
-
-git clone https://github.com/yourusername/bhome.git
-cd bhome
-npm install
-cd client
-npm install
-🔐 Environment Variables
-Create a .env file in the root and add:
-
-MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_jwt_secret
-CLOUDINARY_CLOUD_NAME=your_cloud_name
-CLOUDINARY_API_KEY=your_api_key
-CLOUDINARY_API_SECRET=your_api_secret
-MAP_API_KEY=your_mapbox_or_google_key
-▶️ Running the App
-
-# Backend
-
-cd server
-
-npm run dev
-
-# Frontend
-
-cd client
-
-npm run dev
-
-
 ## 🧪 Upcoming Features
 
 🏦 Admin Dashboard for platform management
