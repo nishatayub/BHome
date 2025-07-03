@@ -99,11 +99,3 @@ This project is licensed under the MIT License.
 ## 📬 Contact
 Made with ❤️ by Nishat Ayub
 Drop your queries or suggestions at: nishatayub09@icloud.com
-
-### Let me know if you'd like to customize this further for:
-- **Only frontend** or **only backend**
-- **A MERN-specific setup guide**
-- **A version with Next.js or other tech**
-- Or if you want **Figma-style UI mockups** included in the repo.
-
-##### Want a PDF version or portfolio-ready presentation format too? I can help you
