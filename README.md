@@ -39,7 +39,7 @@
   - In-app chat with potential tenants
 
 ### 💳 Secure Payments (Optional / Future)
-- Integration with Stripe/PayPal for deposit and rent payments
+- Integration with Stripe/PayPal/RazorPay for deposit and rent payments
 - Payment receipts and history
 
 ---
@@ -78,9 +78,6 @@
 
 📱 Progressive Web App (PWA) features for offline use
 
-## 📸 UI Previews
-Coming soon! Add some cool screenshots or Figma mockups here.
-
 ## 🧠 Learnings & Goals
 Developed full CRUD operations with role-based access
 
@@ -92,9 +89,6 @@ Improved UX through feedback-driven iterations
 
 ## 🤝 Contributing
 Feel free to open issues or submit pull requests. All feedback is welcome!
-
-## 📝 License
-This project is licensed under the MIT License.
 
 ## 📬 Contact
 Made with ❤️ by Nishat Ayub
