@@ -4,7 +4,7 @@ import React from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation';
 import Image from 'next/image'
-import logo from '@/assets/images/logo-white.png'
+import logo from '@/assets/images/logo.png'
 import profileDefault from '@/assets/images/profile.png' 
 import { FaGoogle } from 'react-icons/fa'
 
@@ -16,16 +16,16 @@ const NavBar = () => {
     const pathname = usePathname();
 
   return (
-    <nav className="bg-gradient-to-r from-[#483C32] via-[#36454F] to-[#483C32] border-b-2 border-[#D2B48C] shadow-lg backdrop-blur-sm">
+    <nav className="bg-gradient-to-r from-white via-gray-50 to-white border-b border-gray-200 shadow-2xl sticky top-0 z-50 backdrop-blur-xl">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-        <div className="relative flex h-20 items-center justify-between">
+        <div className="relative flex h-16 items-center justify-between">
           <div className="absolute inset-y-0 left-0 flex items-center md:hidden">
             {/* Mobile menu button */}
             <button
               type="button"
               onClick={()=> setIsMobileMenuOpen((prev)=> !prev)}
               id="mobile-dropdown-button"
-              className="relative inline-flex items-center justify-center rounded-md p-2 text-[#D2B48C] hover:bg-[#36454F] hover:text-[#FFFDD0] focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#D2B48C] transition-all duration-200"
+              className="relative inline-flex items-center justify-center rounded-lg p-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 border border-gray-300 hover:border-blue-400"
               aria-controls="mobile-menu"
               aria-expanded="false"
             >
@@ -53,18 +53,17 @@ const NavBar = () => {
           >
             {/* Logo */}
             <Link className="flex flex-shrink-0 items-center group" href="/">
-              <div className="relative">
+              <div className="relative p-2 rounded-xl bg-blue-600 shadow-lg group-hover:shadow-blue-500/25 transition-all duration-300">
                 <Image
-                  className="h-12 w-auto transition-transform duration-200 group-hover:scale-105"
+                  className="h-8 w-auto transition-transform duration-300 group-hover:scale-110 filter brightness-0 invert"
                   src={logo}
                   alt="BHome"
-                  width={48}
-                  height={48}
+                  width={32}
+                  height={32}
                 />
-                <div className="absolute inset-0 bg-[#D2B48C] opacity-0 group-hover:opacity-20 rounded-full transition-opacity duration-200"></div>
               </div>
 
-              <span className="hidden md:block text-[#FFFDD0] text-3xl font-bold ml-3 tracking-wide group-hover:text-[#D2B48C] transition-colors duration-200">
+              <span className="hidden md:block text-gray-900 text-2xl font-bold ml-3 tracking-wide group-hover:text-blue-600 transition-colors duration-300">
                 BHome
               </span>
             </Link>
@@ -73,20 +72,20 @@ const NavBar = () => {
               <div className="flex space-x-1">
                 <Link
                   href="/"
-                  className={`${pathname === '/' ? "bg-[#36454F] shadow-lg border-b-2 border-[#D2B48C]" : "hover:bg-[#36454F]"} text-[#FFFDD0] hover:text-[#D2B48C] rounded-lg px-4 py-2 transition-all duration-200 font-medium`}
+                  className={`${pathname === '/' ? "bg-blue-600 text-white shadow-lg border-b-2 border-blue-400" : "text-gray-700 hover:text-gray-900 hover:bg-gray-100"} rounded-lg px-4 py-2 transition-all duration-300 font-medium border border-transparent hover:border-gray-300`}
                 >
                   Home
                 </Link>
                 <Link
                   href="/properties"
-                  className={`${pathname === '/properties' ? "bg-[#36454F] shadow-lg border-b-2 border-[#D2B48C]" : "hover:bg-[#36454F]"} text-[#FFFDD0] hover:text-[#D2B48C] rounded-lg px-4 py-2 transition-all duration-200 font-medium`}
+                  className={`${pathname === '/properties' ? "bg-blue-600 text-white shadow-lg border-b-2 border-blue-400" : "text-gray-700 hover:text-gray-900 hover:bg-gray-100"} rounded-lg px-4 py-2 transition-all duration-300 font-medium border border-transparent hover:border-gray-300`}
                 >
                   Properties
                 </Link>
                 {isLoggedIn && (
                     <Link
                   href="/properties/add"
-                  className={`${pathname === '/properties/add' ? "bg-[#36454F] shadow-lg border-b-2 border-[#D2B48C]" : "hover:bg-[#36454F]"} text-[#FFFDD0] hover:text-[#D2B48C] rounded-lg px-4 py-2 transition-all duration-200 font-medium`}
+                  className={`${pathname === '/properties/add' ? "bg-blue-600 text-white shadow-lg border-b-2 border-blue-400" : "text-gray-700 hover:text-gray-900 hover:bg-gray-100"} rounded-lg px-4 py-2 transition-all duration-300 font-medium border border-transparent hover:border-gray-300`}
                 >
                   Add Property
                 </Link>
@@ -101,10 +100,10 @@ const NavBar = () => {
             <div className="flex items-center">
                 {!isLoggedIn && (
                     <button
-                className="flex items-center text-[#FFFDD0] bg-[#36454F] hover:bg-[#2F2F2F] hover:text-[#D2B48C] rounded-lg px-4 py-2 transition-all duration-200 shadow-md border border-[#D2B48C] hover:border-[#F5F5DC]"
+                className="flex items-center text-white bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 rounded-lg px-4 py-2 transition-all duration-300 shadow-lg hover:shadow-blue-500/25 border border-blue-500 hover:border-blue-400 font-medium"
               >
-                <FaGoogle className='text-[#D2B48C] mr-2'/>
-                <span className="font-medium">Login or Register</span>
+                <FaGoogle className='text-white mr-2'/>
+                <span>Login or Register</span>
               </button>
                 )}
             </div>
@@ -117,7 +116,7 @@ const NavBar = () => {
             <Link href="/messages" className="relative group">
               <button
                 type="button"
-                className="relative rounded-full bg-[#36454F] p-2 text-[#D2B48C] hover:text-[#FFFDD0] hover:bg-[#2F2F2F] focus:outline-none focus:ring-2 focus:ring-[#D2B48C] focus:ring-offset-2 focus:ring-offset-[#483C32] transition-all duration-200"
+                className="relative rounded-full bg-gray-100 p-2 text-gray-600 hover:text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-white transition-all duration-300 border border-gray-300 hover:border-blue-400"
               >
                 <span className="absolute -inset-1.5"></span>
                 <span className="sr-only">View notifications</span>
@@ -137,7 +136,7 @@ const NavBar = () => {
                 </svg>
               </button>
               <span
-                className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-[#FFFDD0] transform translate-x-1/2 -translate-y-1/2 bg-red-500 rounded-full shadow-lg"
+                className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-red-500 rounded-full shadow-lg"
               >
                 2
                 {/* Replace with the actual number of notifications */}
@@ -148,7 +147,7 @@ const NavBar = () => {
               <div>
                 <button
                   type="button"
-                  className="relative flex rounded-full bg-[#36454F] text-sm focus:outline-none focus:ring-2 focus:ring-[#D2B48C] focus:ring-offset-2 focus:ring-offset-[#483C32] hover:bg-[#2F2F2F] transition-all duration-200 p-1"
+                  className="relative flex rounded-full bg-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-white hover:bg-blue-600 transition-all duration-300 p-1 border border-gray-300 hover:border-blue-400"
                   id="user-menu-button"
                   aria-expanded="false"
                   aria-haspopup="true"
@@ -157,7 +156,7 @@ const NavBar = () => {
                   <span className="absolute -inset-1.5"></span>
                   <span className="sr-only">Open user menu</span>
                   <Image
-                    className="h-8 w-8 rounded-full border-2 border-[#D2B48C]"
+                    className="h-8 w-8 rounded-full border-2 border-blue-400 hover:border-blue-300 transition-colors duration-300"
                     src={profileDefault}
                     alt="Profile"
                     width={32}
@@ -169,7 +168,7 @@ const NavBar = () => {
               {/* Profile dropdown */}
               { isProfileMenuOpen && ( <div
                 id="user-menu"
-                className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-lg bg-[#FFFDD0] py-1 shadow-xl ring-1 ring-[#D2B48C] ring-opacity-50 focus:outline-none border border-[#D2B48C]"
+                className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-xl bg-white backdrop-blur-md py-1 shadow-2xl ring-1 ring-gray-200 focus:outline-none border border-gray-200"
                 role="menu"
                 aria-orientation="vertical"
                 aria-labelledby="user-menu-button"
@@ -177,7 +176,7 @@ const NavBar = () => {
               >
                 <Link
                   href="/profile"
-                  className="block px-4 py-2 text-sm text-[#483C32] hover:bg-[#F5F5DC] transition-colors duration-200"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-300 rounded-lg mx-1"
                   role="menuitem"
                   tabIndex="-1"
                   id="user-menu-item-0"
@@ -186,7 +185,7 @@ const NavBar = () => {
                 </Link>
                 <Link
                   href="/properties/saved"
-                  className="block px-4 py-2 text-sm text-[#483C32] hover:bg-[#F5F5DC] transition-colors duration-200"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-300 rounded-lg mx-1"
                   role="menuitem"
                   tabIndex="-1"
                   id="user-menu-item-2"
@@ -194,7 +193,7 @@ const NavBar = () => {
                   Saved Properties
                 </Link>
                 <button
-                  className="block w-full text-left px-4 py-2 text-sm text-[#483C32] hover:bg-[#F5F5DC] transition-colors duration-200"
+                  className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-300 rounded-lg mx-1"
                   role="menuitem"
                   tabIndex="-1"
                   id="user-menu-item-2"
@@ -210,33 +209,33 @@ const NavBar = () => {
 
       {/* Mobile menu, show/hide based on menu state. */}
       { isMobileMenuOpen && (
-        <div id="mobile-menu" className="md:hidden bg-[#36454F] border-t border-[#D2B48C]">
+        <div id="mobile-menu" className="md:hidden bg-white backdrop-blur-md border-t border-gray-200">
         <div className="space-y-1 px-2 pb-3 pt-2">
           <Link
             href="/"
-            className= {`${pathname==='/' ? 'bg-[#2F2F2F] border-l-4 border-[#D2B48C]' : 'hover:bg-[#2F2F2F]'} text-[#FFFDD0] block rounded-md px-3 py-2 text-base font-medium transition-all duration-200`}
+            className= {`${pathname==='/' ? 'bg-blue-600 text-white border-l-4 border-blue-400' : 'hover:bg-gray-100 text-gray-700 hover:text-gray-900'} block rounded-lg px-3 py-2 text-base font-medium transition-all duration-300 border border-transparent hover:border-gray-300`}
           >
             Home
           </Link>
           <Link
             href="/properties"
-            className={`${pathname==='/properties' ? 'bg-[#2F2F2F] border-l-4 border-[#D2B48C]' : 'hover:bg-[#2F2F2F]'} text-[#FFFDD0] block rounded-md px-3 py-2 text-base font-medium transition-all duration-200`}
+            className={`${pathname==='/properties' ? 'bg-blue-600 text-white border-l-4 border-blue-400' : 'hover:bg-gray-100 text-gray-700 hover:text-gray-900'} block rounded-lg px-3 py-2 text-base font-medium transition-all duration-300 border border-transparent hover:border-gray-300`}
           >
             Properties
           </Link>
           { isLoggedIn && (
             <Link
             href="/properties/add"
-            className={`${pathname==='/properties/add' ? 'bg-[#2F2F2F] border-l-4 border-[#D2B48C]' : 'hover:bg-[#2F2F2F]'} text-[#FFFDD0] block rounded-md px-3 py-2 text-base font-medium transition-all duration-200`}
+            className={`${pathname==='/properties/add' ? 'bg-blue-600 text-white border-l-4 border-blue-400' : 'hover:bg-gray-100 text-gray-700 hover:text-gray-900'} block rounded-lg px-3 py-2 text-base font-medium transition-all duration-300 border border-transparent hover:border-gray-300`}
           >
             Add Property
           </Link>
           )}
           {!isLoggedIn && (
             <button
-            className="flex items-center text-[#FFFDD0] bg-[#2F2F2F] hover:bg-[#483C32] rounded-md px-3 py-2 my-3 w-full transition-all duration-200"
+            className="flex items-center text-white bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 rounded-lg px-3 py-2 my-3 w-full transition-all duration-300 shadow-lg border border-blue-500 hover:border-blue-400"
           >
-            <FaGoogle className='text-[#D2B48C] mr-2'/>
+            <FaGoogle className='text-white mr-2'/>
             <span>Login or Register</span>
           </button>
           )}
