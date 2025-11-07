@@ -1,35 +1,42 @@
 import React from 'react'
 import InfoBox from './InfoBox'
+import { FaSearch, FaMapMarkerAlt, FaCheckCircle, FaLock } from 'react-icons/fa'
 
-const InfoBoxes = () => {
+export default function InfoBoxes() {
+  const items = [
+    {
+      icon: <FaSearch className="w-5 h-5" />,
+      title: 'Easy search',
+      desc: 'Search by city, neighborhood or address with smart suggestions.'
+    },
+    {
+      icon: <FaMapMarkerAlt className="w-5 h-5" />,
+      title: 'Local listings',
+      desc: 'Browse verified properties located near the best amenities.'
+    },
+    {
+      icon: <FaCheckCircle className="w-5 h-5" />,
+      title: 'Verified hosts',
+      desc: 'All listings are verified for quality and accuracy.'
+    },
+    {
+      icon: <FaLock className="w-5 h-5" />,
+      title: 'Secure payments',
+      desc: 'Payments are handled securely and reliably.'
+    }
+  ]
+
   return (
-    <section>
-      <div className="container-xl lg:container m-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 rounded-lg">
-          <InfoBox 
-          heading='For Renters' 
-          backgroundColor='bg-gray-100'
-          buttonInfo={{
-            text: 'Browse Properties',
-            link: '/properties',
-            backgroundColor: 'bg-black'
-          }}>
-            Find your dream rental property. Bookmark properties and contact owners
+    <section className="bg-gray-50 py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {items.map((it, i) => (
+            <InfoBox key={i} icon={it.icon} title={it.title}>
+              {it.desc}
             </InfoBox>
-            <InfoBox 
-          heading='For Property owners' 
-          backgroundColor='bg-blue-100'
-          buttonInfo={{
-            text: 'Add Properties',
-            link: '/properties/add',
-            backgroundColor: 'bg-blue-500'
-          }}>
-            Find your dream rental property. Bookmark properties and contact owners
-            </InfoBox>
+          ))}
         </div>
       </div>
     </section>
   )
 }
-
-export default InfoBoxes

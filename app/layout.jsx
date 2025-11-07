@@ -2,7 +2,6 @@ import NavBar from '@/components/NavBar'
 import React from 'react'
 import '@/assets/styles/globals.css'
 import Footer from '@/components/Footer'
-import AuthProvider from '@/components/AuthProvider'
 
 export const metadata = {
   title: "BHome - Choose property at your earliest convenience",
@@ -15,13 +14,11 @@ const Layout = ({ children }) => {
     <html lang='en'>
       <head />
       <body>
-        <AuthProvider>
-          <NavBar />
-          <main>
-            {children}
-          </main>
-          <Footer />
-        </AuthProvider>
+  <NavBar />
+        <main>
+          {children}
+        </main>
+        <Footer />
       </body>
     </html>
   )

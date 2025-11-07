@@ -1,61 +1,53 @@
-import React from 'react'
-import { FiSearch, FiMapPin, FiHome, FiUsers } from 'react-icons/fi'
+import React, { useState } from 'react'
+import Image from 'next/image'
+import pin from '@/assets/images/pin.svg'
 
 const Hero = () => {
+  const [q, setQ] = useState('')
+
+  const onSearch = (e) => {
+    e.preventDefault()
+    // Replace with real search/navigation logic
+    console.log('Search for:', q)
+  }
+
   return (
-    <section className="bg-blue-700 py-20 mb-4">
-      <div
-        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center"
-      >
-        <div className="text-center">
-          <h1
-            className="text-4xl font-extrabold text-white sm:text-5xl md:text-6xl"
-          >
-            Find The Perfect Rental
-          </h1>
-          <p className="my-4 text-xl text-white">
-            Discover the perfect property that suits your needs.
-          </p>
+    <section className="bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col-reverse md:flex-row items-center gap-8 py-16">
+          {/* Left: text + search */}
+          <div className="w-full md:w-1/2">
+            <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 leading-tight">Find your next place to call home</h1>
+            <p className="mt-4 text-lg text-gray-600">Browse properties for rent and discover neighbourhoods that suit your lifestyle.</p>
+
+            <form onSubmit={onSearch} className="mt-6 flex flex-col sm:flex-row sm:items-center gap-3">
+              <label htmlFor="search" className="sr-only">Search properties</label>
+              <input
+                id="search"
+                value={q}
+                onChange={(e) => setQ(e.target.value)}
+                className="w-full sm:flex-1 px-4 py-3 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                placeholder="Search city, address or property"
+                aria-label="Search properties"
+              />
+
+              <button type="submit" className="inline-flex items-center justify-center px-5 py-3 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">Search</button>
+            </form>
+
+            <div className="mt-4">
+              <a href="/properties" className="text-sm text-indigo-600 hover:underline">Or browse all properties →</a>
+            </div>
+          </div>
+
+          {/* Right: illustration */}
+          <div className="w-full md:w-1/2 flex justify-center md:justify-end">
+            <div className="w-64 h-64 sm:w-80 sm:h-80">
+              <Image src={pin} alt="map pin illustration" width={320} height={320} className="object-contain" />
+            </div>
+          </div>
         </div>
-        <form
-          className="mt-3 mx-auto max-w-2xl w-full flex flex-col md:flex-row items-center"
-        >
-          <div className="w-full md:w-3/5 md:pr-2 mb-4 md:mb-0">
-            <label htmlFor="location" className="sr-only">Location</label>
-            <input
-              type="text"
-              id="location"
-              placeholder="Enter Location (City, State, Zip, etc"
-              className="w-full px-4 py-3 rounded-lg bg-white text-gray-800 focus:outline-none focus:ring focus:ring-blue-500"
-            />
-          </div>
-          <div className="w-full md:w-2/5 md:pl-2">
-            <label htmlFor="property-type" className="sr-only">Property Type</label>
-            <select
-              id="property-type"
-              className="w-full px-4 py-3 rounded-lg bg-white text-gray-800 focus:outline-none focus:ring focus:ring-blue-500"
-            >
-              <option value="All">All</option>
-              <option value="Apartment">Apartment</option>
-              <option value="Studio">Studio</option>
-              <option value="Condo">Condo</option>
-              <option value="House">House</option>
-              <option value="Cabin Or Cottage">Cabin or Cottage</option>
-              <option value="Loft">Loft</option>
-              <option value="Room">Room</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
-          <button
-            type="submit"
-            className="md:ml-4 mt-4 md:mt-0 w-full md:w-auto px-6 py-3 rounded-lg bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-500"
-          >
-            Search
-          </button>
-        </form>
       </div>
     </section>
-
   )
 }
 
