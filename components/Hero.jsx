@@ -10,7 +10,7 @@ const Hero = () => {
   const onSearch = (e) => {
     e.preventDefault()
     // Replace with real search/navigation logic
-    console.log('Search for:', q)
+    // Could redirect to /properties?q=value or call an API
   }
 
   return (

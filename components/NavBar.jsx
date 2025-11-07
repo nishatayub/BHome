@@ -25,7 +25,6 @@ export default function Nav() {
 		if (callbackUrl) {
 			window.location.href = callbackUrl
 		}
-		console.log('Google sign-in redirecting to:', callbackUrl)
 	}
 
 	return (
