@@ -42,11 +42,14 @@ const AddPropertiesPage = () => {
 
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
-    setImages(files);
+    
+    // Add new files to existing images instead of replacing
+    const newImages = [...images, ...files];
+    setImages(newImages);
 
-    // Create preview URLs
-    const previews = files.map(file => URL.createObjectURL(file));
-    setImagePreviews(previews);
+    // Create preview URLs for all images
+    const newPreviews = newImages.map(file => URL.createObjectURL(file));
+    setImagePreviews(newPreviews);
   };
 
   const removeImage = (index) => {
@@ -54,6 +57,12 @@ const AddPropertiesPage = () => {
     const newPreviews = imagePreviews.filter((_, i) => i !== index);
     setImages(newImages);
     setImagePreviews(newPreviews);
+    
+    // Reset file input
+    const fileInput = document.querySelector('input[type="file"]');
+    if (fileInput) {
+      fileInput.value = '';
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -219,28 +228,53 @@ const AddPropertiesPage = () => {
               multiple 
               onChange={handleImageChange}
               className="w-full border p-2 rounded"
-              required
             />
-            <p className="text-sm text-gray-500 mt-1">Upload one or more images (JPG, PNG, etc.)</p>
+            <p className="text-sm text-gray-500 mt-1">
+              Select multiple images at once, or click again to add more. Currently selected: {images.length} image{images.length !== 1 ? 's' : ''}
+            </p>
             
             {imagePreviews.length > 0 && (
-              <div className="mt-4 grid grid-cols-2 md:grid-cols-4 gap-4">
-                {imagePreviews.map((preview, index) => (
-                  <div key={index} className="relative group">
-                    <img 
-                      src={preview} 
-                      alt={`Preview ${index + 1}`} 
-                      className="w-full h-32 object-cover rounded border"
-                    />
+              <div className="mt-4">
+                <div className="flex justify-between items-center mb-2">
+                  <p className="text-sm font-medium text-gray-700">
+                    {imagePreviews.length} image{imagePreviews.length !== 1 ? 's' : ''} ready to upload
+                  </p>
+                  {imagePreviews.length > 0 && (
                     <button
                       type="button"
-                      onClick={() => removeImage(index)}
-                      className="absolute top-1 right-1 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                      onClick={() => {
+                        setImages([]);
+                        setImagePreviews([]);
+                        const fileInput = document.querySelector('input[type="file"]');
+                        if (fileInput) fileInput.value = '';
+                      }}
+                      className="text-sm text-red-500 hover:text-red-700"
                     >
-                      ×
+                      Clear all
                     </button>
-                  </div>
-                ))}
+                  )}
+                </div>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  {imagePreviews.map((preview, index) => (
+                    <div key={index} className="relative group">
+                      <img 
+                        src={preview} 
+                        alt={`Preview ${index + 1}`} 
+                        className="w-full h-32 object-cover rounded border"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => removeImage(index)}
+                        className="absolute top-1 right-1 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                      >
+                        ×
+                      </button>
+                      <div className="absolute bottom-1 left-1 bg-black bg-opacity-60 text-white text-xs px-2 py-1 rounded">
+                        {index + 1}
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
           </div>

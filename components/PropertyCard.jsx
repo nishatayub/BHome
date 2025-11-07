@@ -20,11 +20,28 @@ const PropertyCard = ({ property }) => {
         return 'Contact for rates'
     }
 
+    // Get the correct image URL
+    const getImageUrl = () => {
+        if (!property.images || property.images.length === 0) {
+            return '/images/properties/default.jpg';
+        }
+        
+        const firstImage = property.images[0];
+        
+        // Check if it's a Cloudinary URL or HTTP/HTTPS URL
+        if (firstImage.startsWith('http://') || firstImage.startsWith('https://')) {
+            return firstImage;
+        }
+        
+        // If it's a local filename, prepend the local path
+        return `/images/properties/${firstImage}`;
+    }
+
   return (
     <div className="rounded-xl shadow-md relative">
             <Image
-              src={property.images && property.images[0] ? property.images[0] : '/images/properties/default.jpg'}
-              alt={property.name}
+              src={getImageUrl()}
+              alt={property.name || 'Property image'}
               height={0}
               width={0}
               sizes='100vw'

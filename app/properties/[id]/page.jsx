@@ -38,6 +38,19 @@ const PropertyPage = async ({ params }) => {
     return 'Contact for rates';
   };
 
+  // Helper function to get the correct image URL
+  const getImageUrl = (imageUrl) => {
+    if (!imageUrl) return '/images/properties/default.jpg';
+    
+    // Check if it's a Cloudinary URL or HTTP/HTTPS URL
+    if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
+      return imageUrl;
+    }
+    
+    // If it's a local filename, prepend the local path
+    return `/images/properties/${imageUrl}`;
+  };
+
   return (
     <>
       <section>
@@ -96,7 +109,7 @@ const PropertyPage = async ({ params }) => {
                     property.images.map((image, index) => (
                       <div key={index} className="relative overflow-hidden rounded-lg">
                         <Image
-                          src={`/images/properties/${image}`}
+                          src={getImageUrl(image)}
                           alt={`${property.name} - Image ${index + 1}`}
                           className="object-cover w-full h-[350px] hover:scale-105 transition-transform duration-300"
                           width={800}
