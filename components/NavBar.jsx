@@ -12,7 +12,6 @@ export default function Nav() {
 	const { data: session, status } = useSession()
 
 	const handleGoogleSignIn = () => {
-		// NextAuth automatically uses the correct callback URL based on NEXTAUTH_URL
 		signIn('google', { callbackUrl: '/' })
 	}
 

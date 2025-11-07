@@ -1,7 +1,7 @@
 import connectDB from "@/config/database";
 import User from "@/models/User";
 import Property from "@/models/Property";
-import { auth } from "@/app/api/auth/[...nextauth]/route";
+import { auth } from "@/auth";
 
 // GET /api/bookmarks - Get user's bookmarked properties
 export const GET = async(req) => {

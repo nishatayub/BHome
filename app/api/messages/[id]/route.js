@@ -1,6 +1,6 @@
 import connectDB from "@/config/database";
 import Message from "@/models/Message";
-import { auth } from "@/app/api/auth/[...nextauth]/route";
+import { auth } from "@/auth";
 
 // PUT /api/messages/:id - Mark message as read
 export const PUT = async(req, { params }) => {

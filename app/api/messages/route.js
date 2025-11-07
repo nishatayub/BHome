@@ -1,6 +1,6 @@
 import connectDB from "@/config/database";
 import Message from "@/models/Message";
-import { auth } from "@/app/api/auth/[...nextauth]/route";
+import { auth } from "@/auth";
 
 // GET /api/messages - Get all messages for logged in user
 export const GET = async(req) => {
