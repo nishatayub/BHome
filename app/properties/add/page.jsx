@@ -1,6 +1,6 @@
-"use client";
+export const dynamic = 'force-dynamic'
 
-export const dynamic = 'force-dynamic';
+"use client";
 
 import React, { useState } from "react";
 import { useSession } from "next-auth/react";
