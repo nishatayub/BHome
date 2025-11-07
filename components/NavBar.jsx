@@ -1,30 +1,23 @@
 'use client'
-
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { signIn, signOut, useSession } from 'next-auth/react'
 import logo from '@/assets/images/logo.png'
 import profile from '@/assets/images/profile.png'
 import { FaGoogle } from 'react-icons/fa'
 
 export default function Nav() {
 	const [open, setOpen] = useState(false)
-	const [callbackUrl, setCallbackUrl] = useState('')
-
-	// Determine the OAuth callback URL based on environment
-	useEffect(() => {
-		const isDev = typeof window !== 'undefined' && window.location.hostname === 'localhost'
-		const url = isDev
-			? 'http://localhost:3000/api/auth/callback/google'
-			: 'https://b-home-rose.vercel.app/api/auth/callback/google'
-		setCallbackUrl(url)
-	}, [])
+	const { data: session, status } = useSession()
 
 	const handleGoogleSignIn = () => {
-		// Redirect to OAuth callback URL or your auth endpoint
-		if (callbackUrl) {
-			window.location.href = callbackUrl
-		}
+		// NextAuth automatically uses the correct callback URL based on NEXTAUTH_URL
+		signIn('google', { callbackUrl: '/' })
+	}
+
+	const handleSignOut = () => {
+		signOut({ callbackUrl: '/' })
 	}
 
 	return (
@@ -46,17 +39,41 @@ export default function Nav() {
 
 					{/* Right side - profile avatar on medium+ screens */}
 					<div className="hidden md:flex md:items-center md:space-x-4">
-						<Link href="/profile" className="flex items-center">
-							<Image src={profile} alt="Profile" width={36} height={36} className="rounded-full object-cover" />
-						</Link>
-						{/* Google sign-in button */}
-						<button
-							onClick={handleGoogleSignIn}
-							className="ml-2 inline-flex items-center gap-2 px-3 py-1.5 border border-gray-200 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50"
-						>
-							<FaGoogle className="text-red-500" />
-							<span>Sign in</span>
-						</button>
+						{status === 'loading' ? (
+							<div className="h-9 w-20 bg-gray-200 animate-pulse rounded"></div>
+						) : session ? (
+							<>
+								<Link href="/messages" className="text-gray-700 hover:text-gray-900">
+									Messages
+								</Link>
+								<Link href="/properties/saved" className="text-gray-700 hover:text-gray-900">
+									Saved
+								</Link>
+								<Link href="/profile" className="flex items-center">
+									<Image 
+										src={session.user?.image || profile} 
+										alt="Profile" 
+										width={36} 
+										height={36} 
+										className="rounded-full object-cover" 
+									/>
+								</Link>
+								<button
+									onClick={handleSignOut}
+									className="ml-2 inline-flex items-center gap-2 px-3 py-1.5 border border-gray-200 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50"
+								>
+									Sign out
+								</button>
+							</>
+						) : (
+							<button
+								onClick={handleGoogleSignIn}
+								className="ml-2 inline-flex items-center gap-2 px-3 py-1.5 border border-gray-200 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50"
+							>
+								<FaGoogle className="text-red-500" />
+								<span>Sign in</span>
+							</button>
+						)}
 					</div>
 
 					<div className="md:hidden">
@@ -82,12 +99,30 @@ export default function Nav() {
 					<Link href="/" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">Home</Link>
 					<Link href="/properties" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">Properties</Link>
 					<Link href="/properties/add" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">Add</Link>
-					{/* Mobile: profile and Google sign-in */}
-					<Link href="/profile" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">Profile</Link>
-					<button onClick={handleGoogleSignIn} className="w-full text-left flex items-center gap-2 px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">
-						<FaGoogle className="text-red-500" />
-						<span>Sign in with Google</span>
-					</button>
+					
+					{status === 'loading' ? (
+						<div className="h-10 bg-gray-200 animate-pulse rounded mx-3"></div>
+					) : session ? (
+						<>
+							<Link href="/messages" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">Messages</Link>
+							<Link href="/properties/saved" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">Saved</Link>
+							<Link href="/profile" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">Profile</Link>
+							<button 
+								onClick={handleSignOut} 
+								className="w-full text-left flex items-center gap-2 px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50"
+							>
+								Sign out
+							</button>
+						</>
+					) : (
+						<button 
+							onClick={handleGoogleSignIn} 
+							className="w-full text-left flex items-center gap-2 px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50"
+						>
+							<FaGoogle className="text-red-500" />
+							<span>Sign in with Google</span>
+						</button>
+					)}
 				</div>
 			</div>
 		</nav>
