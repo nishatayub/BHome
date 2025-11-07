@@ -383,8 +383,8 @@ const seedData = [
 async function seed() {
   try {
     await client.connect();
-    const db = client.db('Next'); 
-    const collection = db.collection('BHome'); 
+    const db = client.db('bhome'); 
+    const collection = db.collection('properties'); 
 
     await collection.deleteMany({});
     await collection.insertMany(seedData);

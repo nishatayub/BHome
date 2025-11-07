@@ -1,19 +1,23 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import React from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation';
+import { useSession, signIn, signOut } from 'next-auth/react';
 import Image from 'next/image'
 import logo from '@/assets/images/logo.png'
 import profileDefault from '@/assets/images/profile.png' 
 import { FaGoogle } from 'react-icons/fa'
 
 const NavBar = () => {
+    const { data: session, status } = useSession();
     const [ isMobileMenuOpen, setIsMobileMenuOpen ] = useState(false);
     const [ isProfileMenuOpen, setIsProfileMenuOpen ] = useState(false);
-    const [ isLoggedIn, setIsLoggedIn ] = useState(false);
 
     const pathname = usePathname();
+
+    const isLoggedIn = status === 'authenticated';
+    const profileImage = session?.user?.image || profileDefault;
 
   return (
     <nav className="bg-gradient-to-r from-white via-gray-50 to-white border-b border-gray-200 shadow-2xl sticky top-0 z-50 backdrop-blur-xl">
@@ -100,6 +104,7 @@ const NavBar = () => {
             <div className="flex items-center">
                 {!isLoggedIn && (
                     <button
+                onClick={() => signIn('google')}
                 className="flex items-center text-white bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 rounded-lg px-4 py-2 transition-all duration-300 shadow-lg hover:shadow-blue-500/25 border border-blue-500 hover:border-blue-400 font-medium"
               >
                 <FaGoogle className='text-white mr-2'/>
@@ -110,6 +115,7 @@ const NavBar = () => {
           </div>
 
           {/* Right Side Menu (Logged In) */}
+          {isLoggedIn && (
           <div
             className="absolute inset-y-0 right-0 flex items-center pr-2 md:static md:inset-auto md:ml-6 md:pr-0"
           >
@@ -157,7 +163,7 @@ const NavBar = () => {
                   <span className="sr-only">Open user menu</span>
                   <Image
                     className="h-8 w-8 rounded-full border-2 border-blue-400 hover:border-blue-300 transition-colors duration-300"
-                    src={profileDefault}
+                    src={profileImage}
                     alt="Profile"
                     width={32}
                     height={32}
@@ -193,6 +199,7 @@ const NavBar = () => {
                   Saved Properties
                 </Link>
                 <button
+                  onClick={() => signOut()}
                   className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-300 rounded-lg mx-1"
                   role="menuitem"
                   tabIndex="-1"
@@ -204,6 +211,7 @@ const NavBar = () => {
                 )}
             </div>
           </div>
+          )}
         </div>
       </div>
 
@@ -233,6 +241,7 @@ const NavBar = () => {
           )}
           {!isLoggedIn && (
             <button
+            onClick={() => signIn('google')}
             className="flex items-center text-white bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 rounded-lg px-3 py-2 my-3 w-full transition-all duration-300 shadow-lg border border-blue-500 hover:border-blue-400"
           >
             <FaGoogle className='text-white mr-2'/>

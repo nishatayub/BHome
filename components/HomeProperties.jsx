@@ -1,11 +1,21 @@
 import React from 'react'
-import properties from '@/properties.json'
 import PropertyCard from '@/components/PropertyCard';
 import Link from 'next/link';
+import connectDB from '@/config/database';
+import Property from '@/models/Property';
 
-const HomeProperties = () => {
-
-    const recentProperties = properties.sort(()=> Math.random() - Math.random()).slice(0,3);
+const HomeProperties = async () => {
+  let recentProperties = [];
+  
+  try {
+    await connectDB();
+    const propertiesData = await Property.find({}).lean();
+    const properties = JSON.parse(JSON.stringify(propertiesData));
+    recentProperties = properties.sort(() => Math.random() - Math.random()).slice(0, 3);
+  } catch (error) {
+    console.error('Error fetching properties:', error);
+    recentProperties = [];
+  }
 
   return (
     <>
@@ -15,8 +25,8 @@ const HomeProperties = () => {
           Recent Properties
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {recentProperties === 0 ? 
-            (<p>No Properties Found</p>) : recentProperties.map((property)=> (
+            {recentProperties.length === 0 ? 
+            (<p className="text-center text-gray-500">No Properties Found. Please ensure MongoDB is connected.</p>) : recentProperties.map((property) => (
                 <PropertyCard key={property._id} property={property} />
             ))}
             </div>
