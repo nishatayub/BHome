@@ -1,6 +1,6 @@
-export const dynamic = 'force-dynamic'
-
 "use client";
+
+export const revalidate = 0;
 
 import React, { useState } from "react";
 import { useSession } from "next-auth/react";
